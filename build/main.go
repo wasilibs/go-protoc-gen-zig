@@ -7,8 +7,8 @@ import (
 
 func main() {
 	tasks.Define(tasks.Params{
-		LibraryName: "protoc",
-		LibraryRepo: "protocolbuffers/protobuf",
+		LibraryName: "protoc-gen-zig",
+		LibraryRepo: "arwalk/zig-protobuf",
 		GoReleaser:  true,
 	})
 	boot.Main()
