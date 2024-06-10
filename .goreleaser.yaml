@@ -1,6 +1,6 @@
 builds:
 - main: ./cmd/protoc-gen-zig
-  id: es
+  id: zig
   binary: protoc-gen-zig
   env:
   - CGO_ENABLED=0
@@ -22,4 +22,4 @@ checksum:
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:
-  skip: true
+  disable: true
