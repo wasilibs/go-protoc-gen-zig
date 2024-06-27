@@ -1,3 +1,4 @@
+project_name: protoc-gen-zig
 builds:
   - main: ./cmd/protoc-gen-zig
     id: zig

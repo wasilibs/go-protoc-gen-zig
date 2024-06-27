@@ -29,11 +29,9 @@ plugins:
   - plugin: zig
     out: out/zig
     path:
-      [
-        "go",
-        "run",
-        "github.com/wasilibs/go-protoc-gen-zig/cmd/protoc-gen-zig@latest",
-      ]
+      - "go"
+      - "run"
+      - "github.com/wasilibs/go-protoc-gen-zig/cmd/protoc-gen-zig@latest"
 ```
 
 This makes it possible to have full protobuf/gRPC generation with no installation of tools,
