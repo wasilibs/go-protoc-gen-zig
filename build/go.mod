@@ -1,6 +1,6 @@
 module build
 
-go 1.22
+go 1.22.0
 
 require (
 	github.com/goyek/x v0.1.7
