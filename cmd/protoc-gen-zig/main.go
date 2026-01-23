@@ -8,5 +8,5 @@ import (
 )
 
 func main() {
-	os.Exit(runner.Run("protoc-gen-zig", os.Args[1:], wasm.ProtocGenZig, os.Stdin, os.Stdout, os.Stderr, "."))
+	os.Exit(runner.Run("protoc-gen-zig", os.Args[1:], wasm.ProtocGenZig, os.Stdin, os.Stdout, os.Stderr))
 }
