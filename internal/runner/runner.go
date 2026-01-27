@@ -9,12 +9,11 @@ import (
 	"strings"
 
 	"github.com/tetratelabs/wazero"
-	"github.com/tetratelabs/wazero/experimental/sysfs"
 	"github.com/tetratelabs/wazero/imports/wasi_snapshot_preview1"
 	"github.com/tetratelabs/wazero/sys"
 )
 
-func Run(name string, args []string, wasm []byte, stdin io.Reader, stdout io.Writer, stderr io.Writer, cwd string) int {
+func Run(name string, args []string, wasm []byte, stdin io.Reader, stdout io.Writer, stderr io.Writer) int {
 	ctx := context.Background()
 
 	rt := wazero.NewRuntime(ctx)
@@ -22,8 +21,6 @@ func Run(name string, args []string, wasm []byte, stdin io.Reader, stdout io.Wri
 	wasi_snapshot_preview1.MustInstantiate(ctx, rt)
 
 	args = append([]string{name}, args...)
-
-	root := sysfs.DirFS(cwd)
 
 	cfg := wazero.NewModuleConfig().
 		WithSysNanosleep().
@@ -33,8 +30,7 @@ func Run(name string, args []string, wasm []byte, stdin io.Reader, stdout io.Wri
 		WithStdout(stdout).
 		WithStdin(stdin).
 		WithRandSource(rand.Reader).
-		WithArgs(args...).
-		WithFSConfig(wazero.NewFSConfig().(sysfs.FSConfig).WithSysFSMount(root, "/"))
+		WithArgs(args...)
 	for _, env := range os.Environ() {
 		k, v, _ := strings.Cut(env, "=")
 		cfg = cfg.WithEnv(k, v)

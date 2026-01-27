@@ -1,4 +1,4 @@
-package protoc_gen_swift
+package protocgenzig
 
 import (
 	"bytes"
