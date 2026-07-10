@@ -9,7 +9,8 @@ RUN mkdir -p /workspace && curl -L https://github.com/arwalk/zig-protobuf/archiv
 WORKDIR /workspace
 
 # Zig 0.16's smp_allocator trips wasm32-wasi's single-threaded allocator path.
-RUN sed -i 's/std.heap.smp_allocator/std.heap.wasm_allocator/g' bootstrapped-generator/main.zig \
+# The generator is a protoc plugin, so stdin/stdout must be streaming under WASI.
+RUN sed -i 's/std.heap.smp_allocator/std.heap.wasm_allocator/g; s/File.stdin().reader(/File.stdin().readerStreaming(/g; s/File.stdout().writer(/File.stdout().writerStreaming(/g' bootstrapped-generator/main.zig \
   && /zig/zig build -Dtarget=wasm32-wasi --release=safe
 
 CMD ["cp", "zig-out/bin/protoc-gen-zig.wasm", "/out/"]
