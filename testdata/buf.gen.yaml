@@ -2,4 +2,4 @@ version: v1
 plugins:
   - plugin: zig
     out: ../out/buf/zig
-    path: ["go", "run", "../cmd/protoc-gen-zig"]
+    path: [go, run, ../cmd/protoc-gen-zig]
